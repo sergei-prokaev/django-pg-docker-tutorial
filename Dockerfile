@@ -10,12 +10,12 @@ RUN apk add --update --no-cache postgresql-client
 # Install individual dependencies
 # so that we could avoid install extra packages
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
-	gcc libc-dev linux-headers postgresql-dev
+    gcc libc-dev linux-headers postgresql-dev
 RUN pip install -r /requirements.txt
 
 # Remove dependencies
 RUN apk del .tmp-build-deps
-re
+
 RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
@@ -24,3 +24,6 @@ COPY ./app /app
 RUN adduser -D user
 
 USER user
+
+# Expose the port that the app will run on
+EXPOSE 3003
