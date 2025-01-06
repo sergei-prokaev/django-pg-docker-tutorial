@@ -1,0 +1,34 @@
+stages:
+  - build
+  - push
+  - deploy
+
+variables:
+  DOCKER_IMAGE: "registry.example.com/your-group/django-app"
+
+before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - docker build -t $DOCKER_IMAGE:$CI_COMMIT_TAG .
+  only:
+    - tags
+
+push:
+  stage: push
+  script:
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_TAG
+  only:
+    - tags
+
+deploy:
+  stage: deploy
+  script:
+    - helm upgrade --install django-app ./helm \
+        --namespace default \
+        --set image.repository=$DOCKER_IMAGE \
+        --set image.tag=$CI_COMMIT_TAG
+  only:
+    - tags
