@@ -19,5 +19,4 @@ spec:
   tls:
     - hosts:
         - {{ (index .Values.ingress.hosts 0).host | default "banka.life" }}
-      secretName: {{ .Values.ingress.tls | first.secretName | default "default-tls-secret" }}
-
+      secretName: {{ (index .Values.ingress.tls 0).secretName | default "default-tls-secret" }}
