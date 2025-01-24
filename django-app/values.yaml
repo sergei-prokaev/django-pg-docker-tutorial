@@ -25,6 +25,7 @@ ingress:
       hosts:
         - banka.life
 
+
 resources:
   limits:
     cpu: 500m
