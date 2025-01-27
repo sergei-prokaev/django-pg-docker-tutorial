@@ -16,8 +16,8 @@ ingress:
   hosts:
     - host: banka.life
       paths:
-        - path: /
-          pathType: ImplementationSpecific
+        - path: /  # Указываем путь для маршрутизации
+          pathType: Prefix
   tls:
     - hosts:
         - banka.life

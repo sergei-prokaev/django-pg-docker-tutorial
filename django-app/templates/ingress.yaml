@@ -12,15 +12,13 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: /  # Указываем путь для маршрутизации
+            pathType: Prefix
             backend:
               service:
                 name: {{ include "django-app.fullname" $ }}
                 port:
                   number: {{ $.Values.service.port }}
-          {{- end }}
     {{- end }}
   tls:
     {{- range .Values.ingress.tls }}
