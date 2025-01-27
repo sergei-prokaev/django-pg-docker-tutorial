@@ -48,3 +48,5 @@ kubectl --kubeconfig gitlab-admin.conf get pods
 Ограничьте права только этим namespace.
 В продакшене: вместо cluster-admin рекомендуется использовать более ограниченные права.
 Теперь вы успешно настроили CI/CD и интеграцию Kubernetes для GitLab!
+
+Создание Teamcity пайплайна
